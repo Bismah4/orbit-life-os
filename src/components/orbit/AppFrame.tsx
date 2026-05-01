@@ -17,13 +17,14 @@ export function AppFrame({ children }: { children: React.ReactNode }) {
   );
 }
 
-const NAV = [
+type NavItem = { to: "/home" | "/feed" | "/capture" | "/memory" | "/profile"; label: string; icon: React.ElementType; primary?: boolean };
+const NAV: NavItem[] = [
   { to: "/home", label: "Home", icon: Home },
   { to: "/feed", label: "Feed", icon: Inbox },
   { to: "/capture", label: "", icon: Plus, primary: true },
   { to: "/memory", label: "Memory", icon: Brain },
   { to: "/profile", label: "Profile", icon: UserIcon },
-] as const;
+];
 
 export function BottomNav() {
   const loc = useLocation();
