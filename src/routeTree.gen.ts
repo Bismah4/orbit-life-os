@@ -23,7 +23,17 @@ import { Route as AppHomeRouteImport } from './routes/_app.home'
 import { Route as AppFeedRouteImport } from './routes/_app.feed'
 import { Route as AppDailyPulseRouteImport } from './routes/_app.daily-pulse'
 import { Route as AppCaptureRouteImport } from './routes/_app.capture'
+import { Route as AppAdminRouteImport } from './routes/_app.admin'
+import { Route as AppProfileTermsRouteImport } from './routes/_app.profile.terms'
+import { Route as AppProfileSupportRouteImport } from './routes/_app.profile.support'
+import { Route as AppProfileSecurityRouteImport } from './routes/_app.profile.security'
+import { Route as AppProfileReminderStyleRouteImport } from './routes/_app.profile.reminder-style'
+import { Route as AppProfilePulseTimeRouteImport } from './routes/_app.profile.pulse-time'
+import { Route as AppProfilePrivacyRouteImport } from './routes/_app.profile.privacy'
+import { Route as AppProfilePersonalRouteImport } from './routes/_app.profile.personal'
+import { Route as AppProfileConnectedRouteImport } from './routes/_app.profile.connected'
 import { Route as AppItemsIdRouteImport } from './routes/_app.items.$id'
+import { Route as AppAdminBucketRouteImport } from './routes/_app.admin.$bucket'
 
 const OnboardingRoute = OnboardingRouteImport.update({
   id: '/onboarding',
@@ -94,43 +104,113 @@ const AppCaptureRoute = AppCaptureRouteImport.update({
   path: '/capture',
   getParentRoute: () => AppRoute,
 } as any)
+const AppAdminRoute = AppAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProfileTermsRoute = AppProfileTermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => AppProfileRoute,
+} as any)
+const AppProfileSupportRoute = AppProfileSupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => AppProfileRoute,
+} as any)
+const AppProfileSecurityRoute = AppProfileSecurityRouteImport.update({
+  id: '/security',
+  path: '/security',
+  getParentRoute: () => AppProfileRoute,
+} as any)
+const AppProfileReminderStyleRoute = AppProfileReminderStyleRouteImport.update({
+  id: '/reminder-style',
+  path: '/reminder-style',
+  getParentRoute: () => AppProfileRoute,
+} as any)
+const AppProfilePulseTimeRoute = AppProfilePulseTimeRouteImport.update({
+  id: '/pulse-time',
+  path: '/pulse-time',
+  getParentRoute: () => AppProfileRoute,
+} as any)
+const AppProfilePrivacyRoute = AppProfilePrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => AppProfileRoute,
+} as any)
+const AppProfilePersonalRoute = AppProfilePersonalRouteImport.update({
+  id: '/personal',
+  path: '/personal',
+  getParentRoute: () => AppProfileRoute,
+} as any)
+const AppProfileConnectedRoute = AppProfileConnectedRouteImport.update({
+  id: '/connected',
+  path: '/connected',
+  getParentRoute: () => AppProfileRoute,
+} as any)
 const AppItemsIdRoute = AppItemsIdRouteImport.update({
   id: '/items/$id',
   path: '/items/$id',
   getParentRoute: () => AppRoute,
+} as any)
+const AppAdminBucketRoute = AppAdminBucketRouteImport.update({
+  id: '/$bucket',
+  path: '/$bucket',
+  getParentRoute: () => AppAdminRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRouteWithChildren
   '/onboarding': typeof OnboardingRoute
+  '/admin': typeof AppAdminRouteWithChildren
   '/capture': typeof AppCaptureRoute
   '/daily-pulse': typeof AppDailyPulseRoute
   '/feed': typeof AppFeedRoute
   '/home': typeof AppHomeRoute
   '/memory': typeof AppMemoryRoute
   '/notifications': typeof AppNotificationsRoute
-  '/profile': typeof AppProfileRoute
+  '/profile': typeof AppProfileRouteWithChildren
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
+  '/admin/$bucket': typeof AppAdminBucketRoute
   '/items/$id': typeof AppItemsIdRoute
+  '/profile/connected': typeof AppProfileConnectedRoute
+  '/profile/personal': typeof AppProfilePersonalRoute
+  '/profile/privacy': typeof AppProfilePrivacyRoute
+  '/profile/pulse-time': typeof AppProfilePulseTimeRoute
+  '/profile/reminder-style': typeof AppProfileReminderStyleRoute
+  '/profile/security': typeof AppProfileSecurityRoute
+  '/profile/support': typeof AppProfileSupportRoute
+  '/profile/terms': typeof AppProfileTermsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRouteWithChildren
   '/onboarding': typeof OnboardingRoute
+  '/admin': typeof AppAdminRouteWithChildren
   '/capture': typeof AppCaptureRoute
   '/daily-pulse': typeof AppDailyPulseRoute
   '/feed': typeof AppFeedRoute
   '/home': typeof AppHomeRoute
   '/memory': typeof AppMemoryRoute
   '/notifications': typeof AppNotificationsRoute
-  '/profile': typeof AppProfileRoute
+  '/profile': typeof AppProfileRouteWithChildren
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
+  '/admin/$bucket': typeof AppAdminBucketRoute
   '/items/$id': typeof AppItemsIdRoute
+  '/profile/connected': typeof AppProfileConnectedRoute
+  '/profile/personal': typeof AppProfilePersonalRoute
+  '/profile/privacy': typeof AppProfilePrivacyRoute
+  '/profile/pulse-time': typeof AppProfilePulseTimeRoute
+  '/profile/reminder-style': typeof AppProfileReminderStyleRoute
+  '/profile/security': typeof AppProfileSecurityRoute
+  '/profile/support': typeof AppProfileSupportRoute
+  '/profile/terms': typeof AppProfileTermsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -138,17 +218,27 @@ export interface FileRoutesById {
   '/_app': typeof AppRouteWithChildren
   '/auth': typeof AuthRouteWithChildren
   '/onboarding': typeof OnboardingRoute
+  '/_app/admin': typeof AppAdminRouteWithChildren
   '/_app/capture': typeof AppCaptureRoute
   '/_app/daily-pulse': typeof AppDailyPulseRoute
   '/_app/feed': typeof AppFeedRoute
   '/_app/home': typeof AppHomeRoute
   '/_app/memory': typeof AppMemoryRoute
   '/_app/notifications': typeof AppNotificationsRoute
-  '/_app/profile': typeof AppProfileRoute
+  '/_app/profile': typeof AppProfileRouteWithChildren
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
+  '/_app/admin/$bucket': typeof AppAdminBucketRoute
   '/_app/items/$id': typeof AppItemsIdRoute
+  '/_app/profile/connected': typeof AppProfileConnectedRoute
+  '/_app/profile/personal': typeof AppProfilePersonalRoute
+  '/_app/profile/privacy': typeof AppProfilePrivacyRoute
+  '/_app/profile/pulse-time': typeof AppProfilePulseTimeRoute
+  '/_app/profile/reminder-style': typeof AppProfileReminderStyleRoute
+  '/_app/profile/security': typeof AppProfileSecurityRoute
+  '/_app/profile/support': typeof AppProfileSupportRoute
+  '/_app/profile/terms': typeof AppProfileTermsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -156,6 +246,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/onboarding'
+    | '/admin'
     | '/capture'
     | '/daily-pulse'
     | '/feed'
@@ -166,12 +257,22 @@ export interface FileRouteTypes {
     | '/auth/forgot'
     | '/auth/login'
     | '/auth/signup'
+    | '/admin/$bucket'
     | '/items/$id'
+    | '/profile/connected'
+    | '/profile/personal'
+    | '/profile/privacy'
+    | '/profile/pulse-time'
+    | '/profile/reminder-style'
+    | '/profile/security'
+    | '/profile/support'
+    | '/profile/terms'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
     | '/onboarding'
+    | '/admin'
     | '/capture'
     | '/daily-pulse'
     | '/feed'
@@ -182,13 +283,23 @@ export interface FileRouteTypes {
     | '/auth/forgot'
     | '/auth/login'
     | '/auth/signup'
+    | '/admin/$bucket'
     | '/items/$id'
+    | '/profile/connected'
+    | '/profile/personal'
+    | '/profile/privacy'
+    | '/profile/pulse-time'
+    | '/profile/reminder-style'
+    | '/profile/security'
+    | '/profile/support'
+    | '/profile/terms'
   id:
     | '__root__'
     | '/'
     | '/_app'
     | '/auth'
     | '/onboarding'
+    | '/_app/admin'
     | '/_app/capture'
     | '/_app/daily-pulse'
     | '/_app/feed'
@@ -199,7 +310,16 @@ export interface FileRouteTypes {
     | '/auth/forgot'
     | '/auth/login'
     | '/auth/signup'
+    | '/_app/admin/$bucket'
     | '/_app/items/$id'
+    | '/_app/profile/connected'
+    | '/_app/profile/personal'
+    | '/_app/profile/privacy'
+    | '/_app/profile/pulse-time'
+    | '/_app/profile/reminder-style'
+    | '/_app/profile/security'
+    | '/_app/profile/support'
+    | '/_app/profile/terms'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -309,6 +429,69 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppCaptureRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/admin': {
+      id: '/_app/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AppAdminRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/profile/terms': {
+      id: '/_app/profile/terms'
+      path: '/terms'
+      fullPath: '/profile/terms'
+      preLoaderRoute: typeof AppProfileTermsRouteImport
+      parentRoute: typeof AppProfileRoute
+    }
+    '/_app/profile/support': {
+      id: '/_app/profile/support'
+      path: '/support'
+      fullPath: '/profile/support'
+      preLoaderRoute: typeof AppProfileSupportRouteImport
+      parentRoute: typeof AppProfileRoute
+    }
+    '/_app/profile/security': {
+      id: '/_app/profile/security'
+      path: '/security'
+      fullPath: '/profile/security'
+      preLoaderRoute: typeof AppProfileSecurityRouteImport
+      parentRoute: typeof AppProfileRoute
+    }
+    '/_app/profile/reminder-style': {
+      id: '/_app/profile/reminder-style'
+      path: '/reminder-style'
+      fullPath: '/profile/reminder-style'
+      preLoaderRoute: typeof AppProfileReminderStyleRouteImport
+      parentRoute: typeof AppProfileRoute
+    }
+    '/_app/profile/pulse-time': {
+      id: '/_app/profile/pulse-time'
+      path: '/pulse-time'
+      fullPath: '/profile/pulse-time'
+      preLoaderRoute: typeof AppProfilePulseTimeRouteImport
+      parentRoute: typeof AppProfileRoute
+    }
+    '/_app/profile/privacy': {
+      id: '/_app/profile/privacy'
+      path: '/privacy'
+      fullPath: '/profile/privacy'
+      preLoaderRoute: typeof AppProfilePrivacyRouteImport
+      parentRoute: typeof AppProfileRoute
+    }
+    '/_app/profile/personal': {
+      id: '/_app/profile/personal'
+      path: '/personal'
+      fullPath: '/profile/personal'
+      preLoaderRoute: typeof AppProfilePersonalRouteImport
+      parentRoute: typeof AppProfileRoute
+    }
+    '/_app/profile/connected': {
+      id: '/_app/profile/connected'
+      path: '/connected'
+      fullPath: '/profile/connected'
+      preLoaderRoute: typeof AppProfileConnectedRouteImport
+      parentRoute: typeof AppProfileRoute
+    }
     '/_app/items/$id': {
       id: '/_app/items/$id'
       path: '/items/$id'
@@ -316,28 +499,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppItemsIdRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/admin/$bucket': {
+      id: '/_app/admin/$bucket'
+      path: '/$bucket'
+      fullPath: '/admin/$bucket'
+      preLoaderRoute: typeof AppAdminBucketRouteImport
+      parentRoute: typeof AppAdminRoute
+    }
   }
 }
 
+interface AppAdminRouteChildren {
+  AppAdminBucketRoute: typeof AppAdminBucketRoute
+}
+
+const AppAdminRouteChildren: AppAdminRouteChildren = {
+  AppAdminBucketRoute: AppAdminBucketRoute,
+}
+
+const AppAdminRouteWithChildren = AppAdminRoute._addFileChildren(
+  AppAdminRouteChildren,
+)
+
+interface AppProfileRouteChildren {
+  AppProfileConnectedRoute: typeof AppProfileConnectedRoute
+  AppProfilePersonalRoute: typeof AppProfilePersonalRoute
+  AppProfilePrivacyRoute: typeof AppProfilePrivacyRoute
+  AppProfilePulseTimeRoute: typeof AppProfilePulseTimeRoute
+  AppProfileReminderStyleRoute: typeof AppProfileReminderStyleRoute
+  AppProfileSecurityRoute: typeof AppProfileSecurityRoute
+  AppProfileSupportRoute: typeof AppProfileSupportRoute
+  AppProfileTermsRoute: typeof AppProfileTermsRoute
+}
+
+const AppProfileRouteChildren: AppProfileRouteChildren = {
+  AppProfileConnectedRoute: AppProfileConnectedRoute,
+  AppProfilePersonalRoute: AppProfilePersonalRoute,
+  AppProfilePrivacyRoute: AppProfilePrivacyRoute,
+  AppProfilePulseTimeRoute: AppProfilePulseTimeRoute,
+  AppProfileReminderStyleRoute: AppProfileReminderStyleRoute,
+  AppProfileSecurityRoute: AppProfileSecurityRoute,
+  AppProfileSupportRoute: AppProfileSupportRoute,
+  AppProfileTermsRoute: AppProfileTermsRoute,
+}
+
+const AppProfileRouteWithChildren = AppProfileRoute._addFileChildren(
+  AppProfileRouteChildren,
+)
+
 interface AppRouteChildren {
+  AppAdminRoute: typeof AppAdminRouteWithChildren
   AppCaptureRoute: typeof AppCaptureRoute
   AppDailyPulseRoute: typeof AppDailyPulseRoute
   AppFeedRoute: typeof AppFeedRoute
   AppHomeRoute: typeof AppHomeRoute
   AppMemoryRoute: typeof AppMemoryRoute
   AppNotificationsRoute: typeof AppNotificationsRoute
-  AppProfileRoute: typeof AppProfileRoute
+  AppProfileRoute: typeof AppProfileRouteWithChildren
   AppItemsIdRoute: typeof AppItemsIdRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAdminRoute: AppAdminRouteWithChildren,
   AppCaptureRoute: AppCaptureRoute,
   AppDailyPulseRoute: AppDailyPulseRoute,
   AppFeedRoute: AppFeedRoute,
   AppHomeRoute: AppHomeRoute,
   AppMemoryRoute: AppMemoryRoute,
   AppNotificationsRoute: AppNotificationsRoute,
-  AppProfileRoute: AppProfileRoute,
+  AppProfileRoute: AppProfileRouteWithChildren,
   AppItemsIdRoute: AppItemsIdRoute,
 }
 
