@@ -17,10 +17,13 @@ import { Route as AuthSignupRouteImport } from './routes/auth.signup'
 import { Route as AuthLoginRouteImport } from './routes/auth.login'
 import { Route as AuthForgotRouteImport } from './routes/auth.forgot'
 import { Route as AppProfileRouteImport } from './routes/_app.profile'
+import { Route as AppNotificationsRouteImport } from './routes/_app.notifications'
 import { Route as AppMemoryRouteImport } from './routes/_app.memory'
 import { Route as AppHomeRouteImport } from './routes/_app.home'
 import { Route as AppFeedRouteImport } from './routes/_app.feed'
+import { Route as AppDailyPulseRouteImport } from './routes/_app.daily-pulse'
 import { Route as AppCaptureRouteImport } from './routes/_app.capture'
+import { Route as AppItemsIdRouteImport } from './routes/_app.items.$id'
 
 const OnboardingRoute = OnboardingRouteImport.update({
   id: '/onboarding',
@@ -61,6 +64,11 @@ const AppProfileRoute = AppProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => AppRoute,
 } as any)
+const AppNotificationsRoute = AppNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppMemoryRoute = AppMemoryRouteImport.update({
   id: '/memory',
   path: '/memory',
@@ -76,9 +84,19 @@ const AppFeedRoute = AppFeedRouteImport.update({
   path: '/feed',
   getParentRoute: () => AppRoute,
 } as any)
+const AppDailyPulseRoute = AppDailyPulseRouteImport.update({
+  id: '/daily-pulse',
+  path: '/daily-pulse',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppCaptureRoute = AppCaptureRouteImport.update({
   id: '/capture',
   path: '/capture',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppItemsIdRoute = AppItemsIdRouteImport.update({
+  id: '/items/$id',
+  path: '/items/$id',
   getParentRoute: () => AppRoute,
 } as any)
 
@@ -87,26 +105,32 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRouteWithChildren
   '/onboarding': typeof OnboardingRoute
   '/capture': typeof AppCaptureRoute
+  '/daily-pulse': typeof AppDailyPulseRoute
   '/feed': typeof AppFeedRoute
   '/home': typeof AppHomeRoute
   '/memory': typeof AppMemoryRoute
+  '/notifications': typeof AppNotificationsRoute
   '/profile': typeof AppProfileRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
+  '/items/$id': typeof AppItemsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRouteWithChildren
   '/onboarding': typeof OnboardingRoute
   '/capture': typeof AppCaptureRoute
+  '/daily-pulse': typeof AppDailyPulseRoute
   '/feed': typeof AppFeedRoute
   '/home': typeof AppHomeRoute
   '/memory': typeof AppMemoryRoute
+  '/notifications': typeof AppNotificationsRoute
   '/profile': typeof AppProfileRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
+  '/items/$id': typeof AppItemsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -115,13 +139,16 @@ export interface FileRoutesById {
   '/auth': typeof AuthRouteWithChildren
   '/onboarding': typeof OnboardingRoute
   '/_app/capture': typeof AppCaptureRoute
+  '/_app/daily-pulse': typeof AppDailyPulseRoute
   '/_app/feed': typeof AppFeedRoute
   '/_app/home': typeof AppHomeRoute
   '/_app/memory': typeof AppMemoryRoute
+  '/_app/notifications': typeof AppNotificationsRoute
   '/_app/profile': typeof AppProfileRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
+  '/_app/items/$id': typeof AppItemsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -130,26 +157,32 @@ export interface FileRouteTypes {
     | '/auth'
     | '/onboarding'
     | '/capture'
+    | '/daily-pulse'
     | '/feed'
     | '/home'
     | '/memory'
+    | '/notifications'
     | '/profile'
     | '/auth/forgot'
     | '/auth/login'
     | '/auth/signup'
+    | '/items/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
     | '/onboarding'
     | '/capture'
+    | '/daily-pulse'
     | '/feed'
     | '/home'
     | '/memory'
+    | '/notifications'
     | '/profile'
     | '/auth/forgot'
     | '/auth/login'
     | '/auth/signup'
+    | '/items/$id'
   id:
     | '__root__'
     | '/'
@@ -157,13 +190,16 @@ export interface FileRouteTypes {
     | '/auth'
     | '/onboarding'
     | '/_app/capture'
+    | '/_app/daily-pulse'
     | '/_app/feed'
     | '/_app/home'
     | '/_app/memory'
+    | '/_app/notifications'
     | '/_app/profile'
     | '/auth/forgot'
     | '/auth/login'
     | '/auth/signup'
+    | '/_app/items/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -231,6 +267,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppProfileRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/notifications': {
+      id: '/_app/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof AppNotificationsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/memory': {
       id: '/_app/memory'
       path: '/memory'
@@ -252,6 +295,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppFeedRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/daily-pulse': {
+      id: '/_app/daily-pulse'
+      path: '/daily-pulse'
+      fullPath: '/daily-pulse'
+      preLoaderRoute: typeof AppDailyPulseRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/capture': {
       id: '/_app/capture'
       path: '/capture'
@@ -259,23 +309,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppCaptureRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/items/$id': {
+      id: '/_app/items/$id'
+      path: '/items/$id'
+      fullPath: '/items/$id'
+      preLoaderRoute: typeof AppItemsIdRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
   AppCaptureRoute: typeof AppCaptureRoute
+  AppDailyPulseRoute: typeof AppDailyPulseRoute
   AppFeedRoute: typeof AppFeedRoute
   AppHomeRoute: typeof AppHomeRoute
   AppMemoryRoute: typeof AppMemoryRoute
+  AppNotificationsRoute: typeof AppNotificationsRoute
   AppProfileRoute: typeof AppProfileRoute
+  AppItemsIdRoute: typeof AppItemsIdRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppCaptureRoute: AppCaptureRoute,
+  AppDailyPulseRoute: AppDailyPulseRoute,
   AppFeedRoute: AppFeedRoute,
   AppHomeRoute: AppHomeRoute,
   AppMemoryRoute: AppMemoryRoute,
+  AppNotificationsRoute: AppNotificationsRoute,
   AppProfileRoute: AppProfileRoute,
+  AppItemsIdRoute: AppItemsIdRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
