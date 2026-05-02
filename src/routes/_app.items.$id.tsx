@@ -5,14 +5,15 @@ import { useOrbit } from "@/lib/orbit-store";
 import { CategoryChip, PriorityChip } from "@/components/orbit/Chips";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Check, Bell, Sparkles } from "lucide-react";
+import { Check, Bell, Sparkles, Trash2, MoreVertical } from "lucide-react";
 import { ReminderModal } from "@/components/orbit/ReminderModal";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 
 export const Route = createFileRoute("/_app/items/$id")({ component: ItemDetail });
 
 function ItemDetail() {
   const { id } = useParams({ from: "/_app/items/$id" });
-  const { state, markDone } = useOrbit();
+  const { state, markDone, discardItem, updateItem } = useOrbit();
   const nav = useNavigate();
   const [remindOpen, setRemindOpen] = React.useState(false);
   const item = state.items.find((i) => i.id === id);
