@@ -9,7 +9,7 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/auth/signup")({ component: Signup });
 
 function Signup() {
-  const { signIn, setUser, completeOnboarding } = useOrbit();
+  const { signIn, setUser, resetOnboarding } = useOrbit();
   const nav = useNavigate();
   const [loading, setLoading] = React.useState(false);
 
@@ -19,10 +19,11 @@ function Signup() {
     setLoading(true);
     await new Promise((r) => setTimeout(r, 600));
     setUser({ name: String(fd.get("name") || "You"), email: String(fd.get("email") || "") });
-    completeOnboarding();
+    // New signups must go through onboarding before entering the app.
+    resetOnboarding();
     signIn();
     toast.success("Account created");
-    nav({ to: "/home" });
+    nav({ to: "/onboarding" });
   };
 
   return (
