@@ -5,14 +5,15 @@ import { useOrbit } from "@/lib/orbit-store";
 import { CategoryChip, PriorityChip } from "@/components/orbit/Chips";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Check, Bell, Sparkles } from "lucide-react";
+import { Check, Bell, Sparkles, Trash2, MoreVertical } from "lucide-react";
 import { ReminderModal } from "@/components/orbit/ReminderModal";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 
 export const Route = createFileRoute("/_app/items/$id")({ component: ItemDetail });
 
 function ItemDetail() {
   const { id } = useParams({ from: "/_app/items/$id" });
-  const { state, markDone } = useOrbit();
+  const { state, markDone, discardItem, updateItem } = useOrbit();
   const nav = useNavigate();
   const [remindOpen, setRemindOpen] = React.useState(false);
   const item = state.items.find((i) => i.id === id);
@@ -30,7 +31,29 @@ function ItemDetail() {
 
   return (
     <div>
-      <ScreenHeader title="Detail" back="/feed" />
+      <ScreenHeader
+        title="Detail"
+        back="/feed"
+        right={
+          <DropdownMenu>
+            <DropdownMenuTrigger className="h-9 w-9 grid place-items-center rounded-full hover:bg-surface transition" aria-label="More">
+              <MoreVertical className="h-4 w-4" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="bg-popover">
+              <DropdownMenuItem onClick={() => updateItem(item.id, { priority: "high" })}>Set high priority</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => updateItem(item.id, { priority: "med" })}>Set medium</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => updateItem(item.id, { priority: "low" })}>Set low</DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onClick={() => { discardItem(item.id); toast("Discarded"); nav({ to: "/feed" }); }}
+                className="text-[var(--pri-high)] focus:text-[var(--pri-high)]"
+              >
+                <Trash2 className="h-4 w-4 mr-2" /> Discard
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        }
+      />
       <div className="px-5 py-5 space-y-5">
         <div className="flex items-center gap-1.5">
           <CategoryChip value={item.category} />

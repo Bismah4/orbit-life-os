@@ -15,6 +15,7 @@ function Home() {
   const active = state.items.filter((i) => !i.completedAt);
   const top = active.slice(0, 3);
   const canWait = active.slice(3, 6);
+  const upcomingReminders = state.reminders.filter((r) => !r.completed && new Date(r.remindAt).getTime() > Date.now()).length;
 
   return (
     <div className="px-5 pt-5 pb-8 space-y-6">
@@ -24,8 +25,13 @@ function Home() {
           <h1 className="text-2xl font-semibold tracking-tight">{state.user.name.split(" ")[0]}</h1>
         </div>
         <div className="flex items-center gap-2">
-          <Link to="/notifications" aria-label="Notifications" className="h-10 w-10 grid place-items-center rounded-full bg-surface ring-1 ring-border hover:bg-surface-2 transition">
+          <Link to="/notifications" aria-label="Notifications" className="relative h-10 w-10 grid place-items-center rounded-full bg-surface ring-1 ring-border hover:bg-surface-2 transition">
             <Bell className="h-4.5 w-4.5" />
+            {upcomingReminders > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 h-4 min-w-4 px-1 rounded-full bg-[var(--pri-high)] text-[10px] font-semibold text-white grid place-items-center ring-2 ring-background">
+                {upcomingReminders > 9 ? "9+" : upcomingReminders}
+              </span>
+            )}
           </Link>
           <button onClick={() => setQp(true)} aria-label="Quick profile" className="h-10 w-10 rounded-full bg-gradient-to-br from-[var(--orbit-blue)] to-[oklch(0.55_0.18_265)] grid place-items-center text-sm font-semibold ring-1 ring-white/10">
             {state.user.name[0]}
