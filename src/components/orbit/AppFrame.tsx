@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link, useLocation } from "@tanstack/react-router";
-import { Home, Inbox, Brain, Plus, User as UserIcon } from "lucide-react";
+import { Home, Inbox, Brain, Plus, User as UserIcon, ChevronLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /** Mobile-app-width container. All overlays must be portaled inside this width. */
