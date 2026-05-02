@@ -115,6 +115,7 @@ interface Ctx {
   setSecurity: (patch: Partial<OrbitState["security"]>) => void;
   setPrefs: (patch: Partial<OrbitState["prefs"]>) => void;
   completeOnboarding: () => void;
+  resetOnboarding: () => void;
   signIn: () => void;
   signOut: () => void;
   reset: () => void;
@@ -185,6 +186,7 @@ export function OrbitProvider({ children }: { children: React.ReactNode }) {
     setSecurity: (patch) => setState((s) => ({ ...s, security: { ...s.security, ...patch } })),
     setPrefs: (patch) => setState((s) => ({ ...s, prefs: { ...s.prefs, ...patch } })),
     completeOnboarding: () => setState((s) => ({ ...s, hasOnboarded: true })),
+    resetOnboarding: () => setState((s) => ({ ...s, hasOnboarded: false })),
     signIn: () => setState((s) => ({ ...s, isAuthed: true })),
     signOut: () => setState((s) => ({ ...s, isAuthed: false })),
     reset: () => { localStorage.removeItem(LS_KEY); setState(initialState); },

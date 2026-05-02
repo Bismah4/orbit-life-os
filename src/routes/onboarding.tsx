@@ -32,13 +32,18 @@ const SLIDES = [
 function Onboarding() {
   const [i, setI] = React.useState(0);
   const nav = useNavigate();
-  const { completeOnboarding } = useOrbit();
+  const { state, completeOnboarding } = useOrbit();
 
+  const finish = () => {
+    completeOnboarding();
+    // If they're already authed (e.g. just signed up), drop them into the app.
+    nav({ to: state.isAuthed ? "/home" : "/auth/login" });
+  };
   const next = () => {
     if (i < SLIDES.length - 1) setI(i + 1);
-    else { completeOnboarding(); nav({ to: "/auth/login" }); }
+    else finish();
   };
-  const skip = () => { completeOnboarding(); nav({ to: "/auth/login" }); };
+  const skip = () => finish();
   const slide = SLIDES[i];
 
   return (
