@@ -9,7 +9,7 @@ export function AppFrame({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen w-full flex justify-center bg-background">
       <div
         id="orbit-app"
-        className="relative w-full max-w-[440px] min-h-screen bg-background overflow-hidden flex flex-col shadow-[0_0_120px_-30px_var(--orbit-glow)]"
+        className="relative w-full max-w-[440px] min-h-screen bg-background overflow-x-hidden flex flex-col shadow-[0_0_120px_-30px_var(--orbit-glow)]"
       >
         {children}
       </div>
