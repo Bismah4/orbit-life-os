@@ -80,8 +80,8 @@ export function ScreenHeader({
     <header className="sticky top-0 z-20 flex items-center justify-between gap-2 px-4 h-14 border-b border-border bg-background/80 backdrop-blur-xl">
       <div className="flex items-center gap-2 min-w-0">
         {back && (
-          <Link to={back} className="text-sm text-muted-foreground hover:text-foreground">
-            ←
+          <Link to={back} aria-label="Back" className="h-9 w-9 -ml-2 grid place-items-center rounded-full text-muted-foreground hover:text-foreground hover:bg-surface transition">
+            <ChevronLeft className="h-5 w-5" />
           </Link>
         )}
         <h1 className="text-base font-semibold tracking-tight truncate">{title}</h1>
