@@ -19,7 +19,7 @@ function Profile() {
     { to: "/profile/support", icon: HelpCircle, label: "Support" },
     { to: "/profile/privacy", icon: FileText, label: "Privacy policy" },
     { to: "/profile/terms", icon: FileText, label: "Terms" },
-  ] as const;
+  ] as Array<{ to: "/profile/personal" | "/profile/connected" | "/profile/security" | "/profile/pulse-time" | "/profile/reminder-style" | "/profile/support" | "/profile/privacy" | "/profile/terms"; icon: typeof UserIcon; label: string; sub?: string }>;
 
   return (
     <div>
