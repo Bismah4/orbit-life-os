@@ -24,6 +24,7 @@ import { Route as AppFeedRouteImport } from './routes/_app.feed'
 import { Route as AppDailyPulseRouteImport } from './routes/_app.daily-pulse'
 import { Route as AppCaptureRouteImport } from './routes/_app.capture'
 import { Route as AppAdminRouteImport } from './routes/_app.admin'
+import { Route as AppProfileIndexRouteImport } from './routes/_app.profile.index'
 import { Route as AppProfileTermsRouteImport } from './routes/_app.profile.terms'
 import { Route as AppProfileSupportRouteImport } from './routes/_app.profile.support'
 import { Route as AppProfileSecurityRouteImport } from './routes/_app.profile.security'
@@ -109,6 +110,11 @@ const AppAdminRoute = AppAdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => AppRoute,
 } as any)
+const AppProfileIndexRoute = AppProfileIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppProfileRoute,
+} as any)
 const AppProfileTermsRoute = AppProfileTermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -185,6 +191,7 @@ export interface FileRoutesByFullPath {
   '/profile/security': typeof AppProfileSecurityRoute
   '/profile/support': typeof AppProfileSupportRoute
   '/profile/terms': typeof AppProfileTermsRoute
+  '/profile/': typeof AppProfileIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -197,7 +204,6 @@ export interface FileRoutesByTo {
   '/home': typeof AppHomeRoute
   '/memory': typeof AppMemoryRoute
   '/notifications': typeof AppNotificationsRoute
-  '/profile': typeof AppProfileRouteWithChildren
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
@@ -211,6 +217,7 @@ export interface FileRoutesByTo {
   '/profile/security': typeof AppProfileSecurityRoute
   '/profile/support': typeof AppProfileSupportRoute
   '/profile/terms': typeof AppProfileTermsRoute
+  '/profile': typeof AppProfileIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -239,6 +246,7 @@ export interface FileRoutesById {
   '/_app/profile/security': typeof AppProfileSecurityRoute
   '/_app/profile/support': typeof AppProfileSupportRoute
   '/_app/profile/terms': typeof AppProfileTermsRoute
+  '/_app/profile/': typeof AppProfileIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -267,6 +275,7 @@ export interface FileRouteTypes {
     | '/profile/security'
     | '/profile/support'
     | '/profile/terms'
+    | '/profile/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -279,7 +288,6 @@ export interface FileRouteTypes {
     | '/home'
     | '/memory'
     | '/notifications'
-    | '/profile'
     | '/auth/forgot'
     | '/auth/login'
     | '/auth/signup'
@@ -293,6 +301,7 @@ export interface FileRouteTypes {
     | '/profile/security'
     | '/profile/support'
     | '/profile/terms'
+    | '/profile'
   id:
     | '__root__'
     | '/'
@@ -320,6 +329,7 @@ export interface FileRouteTypes {
     | '/_app/profile/security'
     | '/_app/profile/support'
     | '/_app/profile/terms'
+    | '/_app/profile/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -436,6 +446,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAdminRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/profile/': {
+      id: '/_app/profile/'
+      path: '/'
+      fullPath: '/profile/'
+      preLoaderRoute: typeof AppProfileIndexRouteImport
+      parentRoute: typeof AppProfileRoute
+    }
     '/_app/profile/terms': {
       id: '/_app/profile/terms'
       path: '/terms'
@@ -530,6 +547,7 @@ interface AppProfileRouteChildren {
   AppProfileSecurityRoute: typeof AppProfileSecurityRoute
   AppProfileSupportRoute: typeof AppProfileSupportRoute
   AppProfileTermsRoute: typeof AppProfileTermsRoute
+  AppProfileIndexRoute: typeof AppProfileIndexRoute
 }
 
 const AppProfileRouteChildren: AppProfileRouteChildren = {
@@ -541,6 +559,7 @@ const AppProfileRouteChildren: AppProfileRouteChildren = {
   AppProfileSecurityRoute: AppProfileSecurityRoute,
   AppProfileSupportRoute: AppProfileSupportRoute,
   AppProfileTermsRoute: AppProfileTermsRoute,
+  AppProfileIndexRoute: AppProfileIndexRoute,
 }
 
 const AppProfileRouteWithChildren = AppProfileRoute._addFileChildren(
